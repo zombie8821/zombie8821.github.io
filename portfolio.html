@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ian Minner — Portfolio</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0d1117;
+      color: #e6edf3;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: #58a6ff; text-decoration: none; }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      border-bottom: 1px solid #21262d;
+      position: sticky;
+      top: 0;
+      background: #0d1117;
+      z-index: 10;
+    }
+    .nav-name { font-size: 1.1rem; font-weight: 600; color: #e6edf3; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a { font-size: 0.9rem; color: #8b949e; transition: color 0.2s; }
+    .nav-links a:hover { color: #e6edf3; }
+
+    /* HERO */
+    .hero {
+      padding: 5rem 2rem 4rem;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #e6edf3, #58a6ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: #8b949e;
+      max-width: 560px;
+      margin: 0 auto 2rem;
+    }
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .badge {
+      background: #161b22;
+      border: 1px solid #30363d;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: #8b949e;
+    }
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary { background: #1f6feb; color: #fff; }
+    .btn-primary:hover { background: #388bfd; }
+    .btn-outline { background: transparent; color: #e6edf3; border: 1px solid #30363d; }
+    .btn-outline:hover { background: #161b22; }
+
+    /* SECTIONS */
+    section {
+      padding: 3rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #58a6ff;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: #e6edf3;
+    }
+
+    /* PROJECT CARDS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+    .card {
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover { border-color: #30363d; transform: translateY(-2px); }
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+    .icon-blue { background: #0d2137; }
+    .icon-green { background: #0d2113; }
+    .icon-purple { background: #170d37; }
+    .card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; color: #e6edf3; }
+    .card p { font-size: 0.85rem; color: #8b949e; margin-bottom: 1rem; line-height: 1.55; }
+    .tech-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+    .tech {
+      background: #0d1117;
+      border: 1px solid #21262d;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      color: #8b949e;
+      font-family: 'Courier New', monospace;
+    }
+    .card-links { display: flex; gap: 0.75rem; }
+    .card-link { font-size: 0.82rem; color: #58a6ff; display: flex; align-items: center; gap: 0.25rem; }
+    .card-link:hover { color: #79c0ff; }
+    .featured { border-color: #1f6feb; position: relative; overflow: hidden; }
+    .featured::before {
+      content: 'Featured';
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #1f6feb;
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .skill-card {
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+    .skill-card h4 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #8b949e;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+    .skill-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .skill-tag {
+      background: #0d1117;
+      border: 1px solid #21262d;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: #e6edf3;
+    }
+
+    /* ABOUT */
+    .about-box {
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 12px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .about-box p { font-size: 0.95rem; color: #8b949e; line-height: 1.7; }
+    .stat-row { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .stat { display: flex; flex-direction: column; }
+    .stat-num { font-size: 1.5rem; font-weight: 700; color: #58a6ff; }
+    .stat-label { font-size: 0.8rem; color: #8b949e; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid #21262d;
+      padding: 2rem;
+      text-align: center;
+      color: #484f58;
+      font-size: 0.85rem;
+    }
+    footer a { color: #58a6ff; }
+    footer a:hover { color: #79c0ff; }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      nav { padding: 1rem; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-name">Ian Minner</span>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#about">About</a>
+      <a href="mailto:your@email.com">Contact</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <h1>CS Student & Developer</h1>
+    <p>First-year Computer Science student at the University of Kentucky. Building things in C++, exploring cybersecurity, and learning every day.</p>
+    <div class="badges">
+      <span class="badge">University of Kentucky</span>
+      <span class="badge">C++ / SFML</span>
+      <span class="badge">Google Cybersecurity Cert</span>
+      <span class="badge">Linux / SQL</span>
+    </div>
+    <div class="cta-row">
+      <a href="#projects" class="btn btn-primary">View my projects</a>
+      <a href="https://github.com/yourusername" target="_blank" class="btn btn-outline">GitHub ↗</a>
+    </div>
+  </div>
+
+  <section id="projects">
+    <div class="section-label">Work</div>
+    <div class="section-title">Projects</div>
+    <div class="projects-grid">
+
+      <div class="card featured">
+        <div class="card-icon icon-blue">🏓</div>
+        <h3>Pong</h3>
+        <p>A fully featured Pong game with paddle physics, scoring system, sound effects, and a game-over screen — built from scratch in C++ with SFML.</p>
+        <div class="tech-row">
+          <span class="tech">C++</span>
+          <span class="tech">SFML</span>
+          <span class="tech">Visual Studio</span>
+        </div>
+        <div class="card-links">
+          <a class="card-link" href="https://github.com/yourusername/pong" target="_blank">📂 GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon icon-green">📋</div>
+        <h3>Contact Database</h3>
+        <p>A CLI contact manager using a doubly linked list with full CRUD operations, file I/O for persistent storage, and sorting support.</p>
+        <div class="tech-row">
+          <span class="tech">C++</span>
+          <span class="tech">Linked Lists</span>
+          <span class="tech">File I/O</span>
+        </div>
+        <div class="card-links">
+          <a class="card-link" href="https://github.com/yourusername/contact-database" target="_blank">📂 GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon icon-purple">🃏</div>
+        <h3>War Card Game</h3>
+        <p>A text-based implementation of the card game War — built to practice object-oriented design and game logic in C++.</p>
+        <div class="tech-row">
+          <span class="tech">C++</span>
+          <span class="tech">OOP</span>
+          <span class="tech">STL</span>
+        </div>
+        <div class="card-links">
+          <a class="card-link" href="https://github.com/yourusername/war-card-game" target="_blank">📂 GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-label">Toolbox</div>
+    <div class="section-title">Skills</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h4>Languages</h4>
+        <div class="skill-list">
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Bash</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>Tools & Frameworks</h4>
+        <div class="skill-list">
+          <span class="skill-tag">SFML</span>
+          <span class="skill-tag">Visual Studio</span>
+          <span class="skill-tag">Linux</span>
+          <span class="skill-tag">Git</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>Concepts</h4>
+        <div class="skill-list">
+          <span class="skill-tag">Data Structures</span>
+          <span class="skill-tag">Algorithms</span>
+          <span class="skill-tag">Networking</span>
+          <span class="skill-tag">Cybersecurity</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>Studying</h4>
+        <div class="skill-list">
+          <span class="skill-tag">Google Cyber Cert</span>
+          <span class="skill-tag">Calculus II</span>
+          <span class="skill-tag">ML / AI</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-label">Background</div>
+    <div class="section-title">About me</div>
+    <div class="about-box">
+      <p>I'm a first-year Computer Science student at the University of Kentucky with a focus on building real projects and learning deeply. I'm passionate about systems programming, cybersecurity, and eventually machine learning — especially how it intersects with real-world problems like misinformation detection.</p>
+      <p>Outside of school, I work part-time at Pikeville Medical Center and spend my time building C++ projects, working through the Google Cybersecurity Certificate, and exploring Linux environments. I believe the best way to learn is to build.</p>
+      <div class="stat-row">
+        <div class="stat">
+          <span class="stat-num">3+</span>
+          <span class="stat-label">C++ projects</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">CS215</span>
+          <span class="stat-label">Data Structures complete</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">Google</span>
+          <span class="stat-label">Cybersecurity cert in progress</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built by Ian Minner &middot; <a href="https://github.com/yourusername">GitHub</a> &middot; <a href="https://linkedin.com/in/yourusername">LinkedIn</a></p>
+  </footer>
+
+</body>
+</html>
