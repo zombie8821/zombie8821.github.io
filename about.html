@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn more about Ian Belcher, a computer science student focused on systems, cybersecurity, and building practical software." />
+  <title>About Ian Belcher</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface-soft: #111820;
+      --border: #26313d;
+      --text: #e6edf3;
+      --muted: #9ba7b4;
+      --blue: #58a6ff;
+      --blue-strong: #1f6feb;
+      --green: #3fb950;
+      --purple: #bc8cff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(31, 111, 235, 0.16), transparent 28rem),
+        radial-gradient(circle at 90% 40%, rgba(188, 140, 255, 0.10), transparent 26rem),
+        var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; border-radius: 5px; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem max(1.25rem, calc((100vw - 1080px) / 2));
+      background: rgba(13, 17, 23, 0.82);
+      border-bottom: 1px solid rgba(48, 54, 61, 0.75);
+      backdrop-filter: blur(14px);
+    }
+    .brand { font-weight: 700; letter-spacing: 0.01em; }
+    .nav-links { display: flex; align-items: center; gap: 1.4rem; color: var(--muted); font-size: 0.92rem; }
+    .nav-links a { transition: color 0.2s ease; }
+    .nav-links a:hover, .nav-links .active { color: var(--text); }
+    .back-link { color: var(--blue); }
+
+    main { width: min(1080px, calc(100% - 2rem)); margin: 0 auto; }
+    .hero {
+      min-height: 72vh;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      align-items: center;
+      gap: 4rem;
+      padding: 5rem 0 4rem;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 1.1rem;
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 2rem; height: 1px; background: var(--blue); }
+    h1 { max-width: 760px; font-size: clamp(2.8rem, 7vw, 5.7rem); line-height: 0.98; letter-spacing: -0.055em; }
+    h1 span {
+      display: block;
+      background: linear-gradient(110deg, var(--blue), #94c8ff 50%, var(--purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .intro { max-width: 670px; margin-top: 1.5rem; color: var(--muted); font-size: 1.12rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 2rem; }
+    .button { padding: 0.72rem 1.15rem; border: 1px solid var(--border); border-radius: 9px; font-weight: 650; font-size: 0.9rem; transition: transform 0.2s, background 0.2s; }
+    .button:hover { transform: translateY(-2px); background: var(--surface); }
+    .button.primary { background: var(--blue-strong); border-color: var(--blue-strong); color: #fff; }
+    .button.primary:hover { background: #388bfd; }
+
+    .portrait {
+      position: relative;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      background: linear-gradient(145deg, rgba(88, 166, 255, 0.12), rgba(188, 140, 255, 0.05));
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+    }
+    .portrait::before, .portrait::after { content: ""; position: absolute; border-radius: 50%; filter: blur(2px); }
+    .portrait::before { width: 70%; height: 70%; top: -20%; right: -15%; background: rgba(88, 166, 255, 0.15); }
+    .portrait::after { width: 55%; height: 55%; bottom: -20%; left: -10%; background: rgba(188, 140, 255, 0.13); }
+    .monogram { position: relative; z-index: 1; font-size: clamp(5rem, 13vw, 9rem); font-weight: 800; letter-spacing: -0.09em; color: rgba(230, 237, 243, 0.92); text-shadow: 0 0 50px rgba(88, 166, 255, 0.25); }
+    .status { position: absolute; z-index: 2; left: 1.25rem; bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; border: 1px solid var(--border); border-radius: 999px; background: rgba(13, 17, 23, 0.82); color: var(--muted); font-size: 0.76rem; }
+    .status-dot { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 5px rgba(63, 185, 80, 0.1); }
+
+    .section { padding: 5.5rem 0; border-top: 1px solid rgba(48, 54, 61, 0.7); }
+    .section-heading { display: grid; grid-template-columns: 0.45fr 1.55fr; gap: 3rem; margin-bottom: 2.5rem; }
+    .section-number { color: var(--blue); font-family: Consolas, monospace; font-size: 0.86rem; }
+    h2 { font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.08; letter-spacing: -0.035em; }
+    .story { display: grid; grid-template-columns: 0.45fr 1.55fr; gap: 3rem; }
+    .story-label { color: var(--muted); font-size: 0.88rem; }
+    .story-copy { display: grid; gap: 1.1rem; color: var(--muted); font-size: 1.03rem; }
+    .story-copy strong { color: var(--text); }
+
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .card { min-height: 250px; display: flex; flex-direction: column; padding: 1.5rem; border: 1px solid var(--border); border-radius: 18px; background: linear-gradient(145deg, rgba(22, 27, 34, 0.95), rgba(17, 24, 32, 0.72)); transition: transform 0.25s, border-color 0.25s; }
+    .card:hover { transform: translateY(-5px); border-color: #49647e; }
+    .card-icon { width: 2.65rem; height: 2.65rem; display: grid; place-items: center; margin-bottom: auto; border-radius: 10px; background: rgba(88, 166, 255, 0.1); font-size: 1.25rem; }
+    .card h3 { margin-top: 2rem; margin-bottom: 0.55rem; font-size: 1.06rem; }
+    .card p { color: var(--muted); font-size: 0.9rem; }
+
+    .timeline { position: relative; display: grid; gap: 1rem; padding-left: 1.7rem; }
+    .timeline::before { content: ""; position: absolute; left: 0.28rem; top: 0.7rem; bottom: 0.7rem; width: 1px; background: linear-gradient(var(--blue), var(--purple)); }
+    .timeline-item { position: relative; padding: 1.25rem 1.4rem; border: 1px solid var(--border); border-radius: 14px; background: rgba(22, 27, 34, 0.72); }
+    .timeline-item::before { content: ""; position: absolute; left: -1.72rem; top: 1.65rem; width: 0.62rem; height: 0.62rem; border: 3px solid var(--bg); border-radius: 50%; background: var(--blue); }
+    .timeline-item small { color: var(--blue); font-family: Consolas, monospace; }
+    .timeline-item h3 { margin: 0.2rem 0; font-size: 1rem; }
+    .timeline-item p { color: var(--muted); font-size: 0.9rem; }
+
+    .contact { margin: 5rem 0; padding: clamp(2rem, 6vw, 4.5rem); text-align: center; border: 1px solid #284e73; border-radius: 24px; background: linear-gradient(135deg, rgba(31, 111, 235, 0.15), rgba(188, 140, 255, 0.08)); }
+    .contact h2 { max-width: 700px; margin: 0 auto 1rem; }
+    .contact p { max-width: 600px; margin: 0 auto 1.7rem; color: var(--muted); }
+    footer { padding: 2rem 1rem; border-top: 1px solid var(--border); text-align: center; color: #65717e; font-size: 0.82rem; }
+
+    @media (max-width: 760px) {
+      nav { flex-direction: column; gap: 0.65rem; }
+      .nav-links { gap: 0.9rem; flex-wrap: wrap; justify-content: center; }
+      .hero { min-height: auto; grid-template-columns: 1fr; gap: 2.5rem; padding: 4rem 0; }
+      .portrait { width: min(330px, 85vw); justify-self: center; order: -1; }
+      .section-heading, .story { grid-template-columns: 1fr; gap: 0.8rem; }
+      .cards { grid-template-columns: 1fr; }
+      .card { min-height: 210px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <nav aria-label="Primary navigation">
+    <a class="brand" href="index.html">Ian Belcher</a>
+    <div class="nav-links">
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#skills">Skills</a>
+      <a class="active" href="about.html" aria-current="page">About</a>
+      <a href="mailto:ibelcher211@gmail.com">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <div>
+        <div class="eyebrow">A little more about me</div>
+        <h1>Curious by nature.<span>Driven to build.</span></h1>
+        <p class="intro">I'm Ian, a Computer Science student at the University of Kentucky exploring the space where systems, cybersecurity, and intelligent technology meet.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="mailto:ibelcher211@gmail.com">Let's connect</a>
+          <a class="button back-link" href="index.html">← Back to portfolio</a>
+        </div>
+      </div>
+      <div class="portrait" aria-label="Ian Belcher monogram">
+        <span class="monogram" aria-hidden="true">IB</span>
+        <div class="status"><span class="status-dot" aria-hidden="true"></span>Learning &amp; building</div>
+      </div>
+    </header>
+
+    <section class="section" aria-labelledby="story-title">
+      <div class="section-heading">
+        <span class="section-number">01 / STORY</span>
+        <h2 id="story-title">Building a strong foundation, one project at a time.</h2>
+      </div>
+      <div class="story">
+        <p class="story-label">Where I'm coming from</p>
+        <div class="story-copy">
+          <p>I'm a first-year Computer Science student who believes the best way to understand technology is to <strong>take it apart, build something with it, and keep asking why.</strong> My early work in C++ has pushed me to think carefully about logic, structure, and what happens beneath the surface.</p>
+          <p>Alongside school, I work part-time at Pikeville Medical Center. Balancing work, classes, and personal projects has taught me how to stay disciplined, communicate clearly, and keep moving when a problem takes longer than expected.</p>
+          <p>I'm especially interested in cybersecurity and machine learning—particularly how intelligent systems could help people recognize misinformation and make better decisions online. Right now, I'm focused on mastering the fundamentals that will let me contribute meaningfully to those problems.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="values-title">
+      <div class="section-heading">
+        <span class="section-number">02 / APPROACH</span>
+        <h2 id="values-title">What shapes the way I work.</h2>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">⌘</div>
+          <h3>Learn by building</h3>
+          <p>Projects turn abstract ideas into real decisions, mistakes, and lessons that stick.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">◇</div>
+          <h3>Stay curious</h3>
+          <p>I enjoy going past “it works” to understand why it works and how it could be better.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">↗</div>
+          <h3>Keep progressing</h3>
+          <p>Consistent improvement matters more than pretending to already know everything.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="now-title">
+      <div class="section-heading">
+        <span class="section-number">03 / NOW</span>
+        <h2 id="now-title">What I'm focused on right now.</h2>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item">
+          <small>EDUCATION</small>
+          <h3>Computer Science at the University of Kentucky</h3>
+          <p>Strengthening my foundation in data structures, algorithms, mathematics, and software development.</p>
+        </article>
+        <article class="timeline-item">
+          <small>CERTIFICATION</small>
+          <h3>Google Cybersecurity Certificate</h3>
+          <p>Developing practical knowledge of security operations, Linux, networking, SQL, and risk management.</p>
+        </article>
+        <article class="timeline-item">
+          <small>EXPLORATION</small>
+          <h3>Machine learning and misinformation detection</h3>
+          <p>Exploring how AI can be applied responsibly to difficult, real-world information problems.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact" aria-labelledby="contact-title">
+      <div class="eyebrow">Say hello</div>
+      <h2 id="contact-title">I'm always open to learning from new people.</h2>
+      <p>Whether you want to talk about a project, an opportunity, cybersecurity, or where to find the best debugging snacks—I'd be happy to hear from you.</p>
+      <a class="button primary" href="mailto:ibelcher211@gmail.com">Email me</a>
+    </section>
+  </main>
+
+  <footer>Built with curiosity by Ian Belcher · <a href="https://github.com/Zombie8821">GitHub</a> · <a href="https://www.linkedin.com/in/ian-belcher-75147b380/">LinkedIn</a></footer>
+</body>
+</html>

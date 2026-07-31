@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ian Belcher — Portfolio</title>
+  <meta name="description" content="Portfolio of Ian Belcher, a computer science student building C++ projects and studying cybersecurity." />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -15,6 +16,12 @@
     }
 
     a { color: #58a6ff; text-decoration: none; }
+    a:focus-visible {
+      outline: 3px solid #58a6ff;
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+    section { scroll-margin-top: 5rem; }
 
     /* NAV */
     nav {
@@ -229,23 +236,32 @@
     /* RESPONSIVE */
     @media (max-width: 600px) {
       .hero h1 { font-size: 2rem; }
-      nav { padding: 1rem; }
-      .nav-links { gap: 1rem; }
+      nav { padding: 1rem; flex-direction: column; gap: 0.75rem; }
+      .nav-links { gap: 0.9rem; flex-wrap: wrap; justify-content: center; }
+      section { padding: 2.5rem 1rem; }
+      .hero { padding: 4rem 1rem 3rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
 <body>
 
-  <nav>
+  <nav aria-label="Primary navigation">
     <span class="nav-name">Ian Belcher</span>
     <div class="nav-links">
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
-      <a href="#about">About</a>
-      <a href="ibelcher211@gmail.com">Contact</a>
+      <a href="about.html">About</a>
+      <a href="mailto:ibelcher211@gmail.com">Contact</a>
     </div>
   </nav>
 
+  <main>
   <div class="hero">
     <h1>CS Student & Developer</h1>
     <p>First-year Computer Science student at the University of Kentucky. Building things in C++, exploring cybersecurity, and learning every day.</p>
@@ -257,17 +273,17 @@
     </div>
     <div class="cta-row">
       <a href="#projects" class="btn btn-primary">View my projects</a>
-      <a href="https://github.com/Zombie8821" target="_blank" class="btn btn-outline">GitHub ↗</a>
+      <a href="https://github.com/Zombie8821" target="_blank" rel="noopener noreferrer" class="btn btn-outline">GitHub ↗</a>
     </div>
   </div>
 
   <section id="projects">
     <div class="section-label">Work</div>
-    <div class="section-title">Projects</div>
+    <h2 class="section-title">Projects</h2>
     <div class="projects-grid">
 
       <div class="card featured">
-        <div class="card-icon icon-blue">🏓</div>
+        <div class="card-icon icon-blue" aria-hidden="true">🏓</div>
         <h3>Pong</h3>
         <p>A fully featured Pong game with paddle physics, scoring system, sound effects, and a game-over screen — built from scratch in C++ with SFML.</p>
         <div class="tech-row">
@@ -276,12 +292,12 @@
           <span class="tech">Visual Studio</span>
         </div>
         <div class="card-links">
-          <a class="card-link" href="https://github.com/Zombie8821/Pong" target="_blank">📂 GitHub</a>
+          <a class="card-link" href="https://github.com/Zombie8821/Pong" target="_blank" rel="noopener noreferrer">📂 GitHub</a>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-icon icon-green">📋</div>
+        <div class="card-icon icon-green" aria-hidden="true">📋</div>
         <h3>Contact Database</h3>
         <p>A CLI contact manager using a doubly linked list with full CRUD operations, file I/O for persistent storage, and sorting support.</p>
         <div class="tech-row">
@@ -290,12 +306,12 @@
           <span class="tech">File I/O</span>
         </div>
         <div class="card-links">
-          <a class="card-link" href="https://github.com/Zombie8821/contact-database" target="_blank">📂 GitHub</a>
+          <a class="card-link" href="https://github.com/Zombie8821/contact-database" target="_blank" rel="noopener noreferrer">📂 GitHub</a>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-icon icon-purple">🃏</div>
+        <div class="card-icon icon-purple" aria-hidden="true">🃏</div>
         <h3>War Card Game</h3>
         <p>A text-based implementation of the card game War — built to practice object-oriented design and game logic in C++.</p>
         <div class="tech-row">
@@ -304,7 +320,7 @@
           <span class="tech">STL</span>
         </div>
         <div class="card-links">
-          <a class="card-link" href="https://github.com/Zombie8821/war-card-game" target="_blank">📂 GitHub</a>
+          <a class="card-link" href="https://github.com/Zombie8821/war-card-game" target="_blank" rel="noopener noreferrer">📂 GitHub</a>
         </div>
       </div>
 
@@ -313,7 +329,7 @@
 
   <section id="skills">
     <div class="section-label">Toolbox</div>
-    <div class="section-title">Skills</div>
+    <h2 class="section-title">Skills</h2>
     <div class="skills-grid">
       <div class="skill-card">
         <h4>Languages</h4>
@@ -355,7 +371,7 @@
 
   <section id="about">
     <div class="section-label">Background</div>
-    <div class="section-title">About me</div>
+    <h2 class="section-title">About me</h2>
     <div class="about-box">
       <p>I'm a first-year Computer Science student at the University of Kentucky with a focus on building real projects and learning deeply. I'm passionate about systems programming, cybersecurity, and eventually machine learning — especially how it intersects with real-world problems like misinformation detection.</p>
       <p>Outside of school, I work part-time at Pikeville Medical Center and spend my time building C++ projects, working through the Google Cybersecurity Certificate, and exploring Linux environments. I believe the best way to learn is to build.</p>
@@ -375,6 +391,7 @@
       </div>
     </div>
   </section>
+  </main>
 
   <footer>
     <p>Built by Ian Belcher &middot; <a href="https://github.com/Zombie8821">GitHub</a> &middot; <a href="https://www.linkedin.com/in/ian-belcher-75147b380/">LinkedIn</a></p>
